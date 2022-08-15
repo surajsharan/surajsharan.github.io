@@ -3,7 +3,7 @@
 You can use the [editor on GitHub](https://github.com/surajsharan/surajsharan.github.io/edit/main/README.md) to maintain and preview the content for your website in Markdown files.
 
 
-[## Paper](https://openreview.net/pdf?id=0OVN8fE2NPq)
+[Paper](https://openreview.net/pdf?id=0OVN8fE2NPq)
 
 ## Abstract 
 
