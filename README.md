@@ -1,5 +1,13 @@
 
-![main figure](docs/header.png)
+<p align="center">
+  <img src="docs/medical_image.png" />
+</p>
+
+<div align="center">On the left is a nanoscopy image of mouse kidney cryo-section approximately 1/12th of the
+area of a single field-of-view of the microscope, chosen to illustrate the level of details at different
+scales. The bottom right images show that the smallest features in the image of relevance to biological
+factors can be as small as a few pixels (here 5-8 pixels for the holes)</div>
+
 
 ## Motivation
 
@@ -17,7 +25,12 @@ Convolutional neural network (CNN) approaches available in the current literatur
 
 
 ## Problem description
+
+![class_image](docs/umnist.png)\
+
 We pose the problem of the classification of UltraMNIST digits. UltraMNIST dataset comprises very large-scale images, each of 4000x4000 pixels with 3-5 digits per image. Each of these digits has been extracted from the original MNIST dataset. Your task is to predict the sum of the digits per image, and this number can be anything from 0 to 27.
+
+
 
 
 ## Challenge Organizer team
