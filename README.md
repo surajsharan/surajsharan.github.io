@@ -9,9 +9,8 @@ Convolutional neural networks are known to be very powerful feature descriptors,
 
 ## Abstract 
 
-![workflow](docs/workflow.png)
-
-$$\text{*Schematic workflow for the generation of UltraMNIST samples*}$$
+![workflow](docs/workflow.png)  
+<div align="center">**Schematic workflow for the generation of UltraMNIST samples**</div>
 
 
 
