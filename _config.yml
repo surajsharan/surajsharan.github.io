@@ -1,3 +1,2 @@
 theme: jekyll-theme-cayman
 title: UltraMNIST Classification: A Benchmark to Train CNNs for Very Large Images
-dataset url: [https://www.kaggle.com/competitions/ultra-mnist/data]
