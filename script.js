@@ -1,7 +1,7 @@
 particlesJS('particles-js', {
   particles: {
     number: {
-      value: 80,
+      value: 150,
       density: {
         enable: true,
         value_area: 800
@@ -21,35 +21,35 @@ particlesJS('particles-js', {
       }
     },
     opacity: {
-      value: 0.5,
+      value: 0.7,
       random: false,
       anim: {
-        enable: false,
+        enable: true,
         speed: 1,
-        opacity_min: 0.1,
+        opacity_min: 0.3,
         sync: false
       }
     },
     size: {
-      value: 3,
+      value: 4,
       random: true,
       anim: {
-        enable: false,
-        speed: 40,
+        enable: true,
+        speed: 20,
         size_min: 0.1,
         sync: false
       }
     },
     line_linked: {
       enable: true,
-      distance: 150,
+      distance: 120,
       color: "#00ff00",
-      opacity: 0.4,
+      opacity: 0.5,
       width: 1
     },
     move: {
       enable: true,
-      speed: 6,
+      speed: 3,
       direction: "none",
       random: false,
       straight: false,
@@ -67,7 +67,7 @@ particlesJS('particles-js', {
     events: {
       onhover: {
         enable: true,
-        mode: "repulse"
+        mode: "grab"
       },
       onclick: {
         enable: true,
@@ -77,7 +77,7 @@ particlesJS('particles-js', {
     },
     modes: {
       grab: {
-        distance: 400,
+        distance: 200,
         line_linked: {
           opacity: 1
         }
