@@ -4,7 +4,7 @@ particlesJS('particles-js', {
       value: 150,
       density: {
         enable: true,
-        value_area: 800
+        value_area: 1000
       }
     },
     color: {
@@ -17,12 +17,12 @@ particlesJS('particles-js', {
         color: "#000000"
       },
       polygon: {
-        nb_sides: 5
+        nb_sides: 6
       }
     },
     opacity: {
       value: 0.7,
-      random: false,
+      random: true,
       anim: {
         enable: true,
         speed: 1,
@@ -35,7 +35,7 @@ particlesJS('particles-js', {
       random: true,
       anim: {
         enable: true,
-        speed: 20,
+        speed: 10,
         size_min: 0.1,
         sync: false
       }
@@ -51,14 +51,14 @@ particlesJS('particles-js', {
       enable: true,
       speed: 3,
       direction: "none",
-      random: false,
+      random: true,
       straight: false,
       out_mode: "out",
       bounce: false,
       attract: {
-        enable: false,
-        rotateX: 600,
-        rotateY: 1200
+        enable: true,
+        rotateX: 3000,
+        rotateY: 3000
       }
     }
   },
@@ -67,26 +67,26 @@ particlesJS('particles-js', {
     events: {
       onhover: {
         enable: true,
-        mode: "grab"
+        mode: "bubble"
       },
       onclick: {
         enable: true,
-        mode: "push"
+        mode: "repulse"
       },
       resize: true
     },
     modes: {
       grab: {
-        distance: 200,
+        distance: 400,
         line_linked: {
           opacity: 1
         }
       },
       bubble: {
-        distance: 400,
-        size: 40,
+        distance: 250,
+        size: 8,
         duration: 2,
-        opacity: 8,
+        opacity: 0.8,
         speed: 3
       },
       repulse: {
