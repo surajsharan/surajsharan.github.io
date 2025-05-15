@@ -1,0 +1,296 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 0 0% 100%;
+  --foreground: 0 0% 0%;
+  --card: 0 0% 100%;
+  --card-foreground: 240 10% 3.9%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 240 10% 3.9%;
+  --primary: 262.1 83.3% 57.8%;
+  --primary-foreground: 210 20% 98%;
+  --secondary: 240 4.8% 95.9%;
+  --secondary-foreground: 240 5.9% 10%;
+  --muted: 240 4.8% 95.9%;
+  --muted-foreground: 240 3.8% 46.1%;
+  --accent: 240 4.8% 95.9%;
+  --accent-foreground: 240 5.9% 10%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 240 5.9% 90%;
+  --input: 240 5.9% 90%;
+  --ring: 262.1 83.3% 57.8%;
+  --radius: 0.5rem;
+}
+
+.dark {
+  --background: 0 0% 0%;
+  --foreground: 0 0% 100%;
+  --card: 240 10% 3.9%;
+  --card-foreground: 0 0% 98%;
+  --popover: 240 10% 3.9%;
+  --popover-foreground: 0 0% 98%;
+  --primary: 262.1 83.3% 57.8%;
+  --primary-foreground: 210 20% 98%;
+  --secondary: 240 3.7% 15.9%;
+  --secondary-foreground: 0 0% 98%;
+  --muted: 240 3.7% 15.9%;
+  --muted-foreground: 240 5% 64.9%;
+  --accent: 240 3.7% 15.9%;
+  --accent-foreground: 0 0% 98%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 240 3.7% 15.9%;
+  --input: 240 3.7% 15.9%;
+  --ring: 262.1 83.3% 57.8%;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply bg-white text-black transition-colors duration-200;
+  }
+
+  .dark body {
+    @apply bg-black text-white;
+  }
+}
+
+/* Dark mode styles */
+.dark {
+  background-color: black;
+  color: white;
+}
+
+.dark * {
+  @apply transition-colors duration-200;
+}
+
+.dark div, .dark a {
+  --tw-text-opacity: 1;
+  color: #8f8f8f;
+}
+
+.dark .bg-orange-100 {
+  --tw-bg-opacity: 1;
+  background-color: #222e3a;
+}
+
+/* Section backgrounds */
+.dark .bg-gray-50 {
+  --tw-bg-opacity: 1;
+  background-color: #171717;
+}
+
+.dark .bg-white {
+  @apply bg-black;
+}
+
+.dark .bg-gray-100 {
+  --tw-bg-opacity: 1;
+  background-color: #000;
+}
+
+.dark .bg-gray-200 {
+  @apply bg-neutral-700;
+}
+
+/* Text colors */
+.dark .text-black {
+  @apply text-white;
+}
+
+.dark .text-neutral-900 {
+  @apply text-white;
+}
+
+.dark .text-neutral-700 {
+  @apply text-neutral-300;
+}
+
+.dark .text-neutral-600 {
+  @apply text-neutral-400;
+}
+
+.dark .text-neutral-500 {
+  color: rgb(163 163 163); /* This is the equivalent of text-neutral-500 */
+}
+
+/* Card and container styles */
+.dark .bg-white\/90 {
+  @apply bg-neutral-900/90;
+}
+
+.dark .bg-white\/95 {
+  @apply bg-neutral-900/95;
+}
+
+.dark .bg-white\/100 {
+  @apply bg-neutral-900;
+}
+
+.dark .border-gray-200 {
+  @apply border-neutral-800;
+}
+
+.dark .border-black\/10 {
+  @apply border-white/10;
+}
+
+/* Neural network specific dark styles */
+.dark .bg-gradient-to-r {
+  @apply from-neutral-900 to-neutral-800;
+}
+
+.dark .text-purple-600 {
+  @apply text-purple-400;
+}
+
+.dark .bg-purple-100 {
+  @apply bg-purple-900/20;
+}
+
+.dark .bg-blue-100 {
+  @apply bg-blue-900/20;
+}
+
+.dark .bg-green-100 {
+  @apply bg-green-900/20;
+}
+
+.dark .bg-yellow-100 {
+  @apply bg-yellow-900/20;
+}
+
+.dark .bg-red-100 {
+  @apply bg-red-900/20;
+}
+
+/* Form elements */
+.dark input, .dark textarea, .dark select {
+  @apply bg-neutral-800 text-white border-neutral-700;
+}
+
+.dark input:focus, .dark textarea:focus, .dark select:focus {
+  @apply border-purple-500 ring-purple-500/20;
+}
+
+.dark button {
+  @apply bg-neutral-800 text-white border-neutral-700;
+}
+
+.dark button:hover {
+  @apply bg-neutral-700;
+}
+
+/* Social links and badges */
+.dark .bg-gray-200.hover\:bg-purple-500\/20:hover {
+  @apply bg-neutral-800 hover:bg-purple-900/20;
+}
+
+.dark .bg-gray-200.hover\:bg-blue-500\/20:hover {
+  @apply bg-neutral-800 hover:bg-blue-900/20;
+}
+
+.dark .bg-gray-200.hover\:bg-cyan-500\/20:hover {
+  @apply bg-neutral-800 hover:bg-cyan-900/20;
+}
+
+.dark .bg-gray-200.hover\:bg-sky-500\/20:hover {
+  @apply bg-neutral-800 hover:bg-sky-900/20;
+}
+
+/* Progress bars and gradients */
+.dark .bg-gray-200 {
+  @apply bg-neutral-800;
+}
+
+.dark .from-purple-600 {
+  @apply from-purple-500;
+}
+
+.dark .to-blue-500 {
+  @apply to-blue-400;
+}
+
+/* Ensure all text is visible in dark mode */
+.dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6,
+.dark p, .dark span, .dark div, .dark a {
+  @apply text-white;
+}
+
+.dark a:hover {
+  @apply text-purple-400;
+}
+
+/* Learn section specific dark styles */
+.dark .learn-section .absolute.top-16 {
+  --tw-text-opacity: 1;
+  color: rgb(163, 163, 163); /* Lighter gray for better visibility in dark mode */
+}
+
+.dark .learn-section .to-white {
+  --tw-gradient-to: rgb(163, 163, 163) var(--tw-gradient-to-position);
+}
+
+.dark .learn-section .bg-white {
+  --tw-bg-opacity: 1;
+  background-color: #171717;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dark .learn-section .shadow-md {
+  --tw-shadow: 0 4px 6px -1px rgba(255, 255, 255, 0.1), 0 2px 4px -2px rgba(255, 255, 255, 0.1);
+  --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+.dark .learn-section .rounded-xl {
+  border-radius: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dark .learn-section .text-neutral-700 {
+  color: rgb(212, 212, 212);
+}
+
+.dark .learn-section .text-neutral-900 {
+  color: rgb(255, 255, 255);
+}
+
+/* Dark mode gradient and background colors */
+.dark .to-purple-100 {
+  --tw-gradient-to: #8d0f9e var(--tw-gradient-to-position);
+}
+
+.dark .to-red-100 {
+  --tw-gradient-to: #ab1010 var(--tw-gradient-to-position);
+}
+
+.dark .bg-red-50 {
+  --tw-bg-opacity: 1;
+  background-color: #bc4f51;
+}
+
+.dark .to-green-100 {
+  --tw-gradient-to: #0f662d var(--tw-gradient-to-position);
+}
+
+.dark .bg-green-50 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(78 137 96);
+}
+
+.dark .to-yellow-100 {
+  --tw-gradient-to: #988d13 var(--tw-gradient-to-position);
+}
+
+.dark .bg-yellow-50 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(161 161 0);
+}
