@@ -13,12 +13,16 @@ const config = {
   theme: {
     container: {
       center: true,
-      padding: "2rem",
+      padding: "1.5rem",
       screens: {
         "2xl": "1400px",
       },
     },
     extend: {
+      fontFamily: {
+        sans: ["var(--font-sans)", "system-ui", "sans-serif"],
+        mono: ["var(--font-mono)", "ui-monospace", "monospace"],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -53,34 +57,25 @@ const config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        // Neural network theme colors
-        neural: {
-          purple: {
-            DEFAULT: "#8b5cf6",
-            50: "#f5f3ff",
-            100: "#ede9fe",
-            200: "#ddd6fe",
-            300: "#c4b5fd",
-            400: "#a78bfa",
-            500: "#8b5cf6",
-            600: "#7c3aed",
-            700: "#6d28d9",
-            800: "#5b21b6",
-            900: "#4c1d95",
-          },
-          blue: {
-            DEFAULT: "#3b82f6",
-            50: "#eff6ff",
-            100: "#dbeafe",
-            200: "#bfdbfe",
-            300: "#93c5fd",
-            400: "#60a5fa",
-            500: "#3b82f6",
-            600: "#2563eb",
-            700: "#1d4ed8",
-            800: "#1e40af",
-            900: "#1e3a8a",
-          },
+        ink: {
+          950: "#06080B",
+          900: "#0A0E14",
+          800: "#10151C",
+          700: "#161C26",
+          600: "#1F2733",
+          500: "#2A3340",
+          400: "#3D4757",
+        },
+        lime: {
+          DEFAULT: "#C6FF3E",
+          50: "#F4FFD6",
+          100: "#EAFEAE",
+          200: "#D9FC7C",
+          300: "#C6FF3E",
+          400: "#A8E62B",
+          500: "#8AC91F",
+          600: "#6CA516",
+          700: "#4F7C0F",
         },
       },
       borderRadius: {
@@ -97,10 +92,25 @@ const config = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
+        "token-blink": {
+          "0%, 100%": { opacity: "1" },
+          "50%": { opacity: "0.2" },
+        },
+        "ticker-flow": {
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(-50%)" },
+        },
+        "grid-fade": {
+          "0%, 100%": { opacity: "0.35" },
+          "50%": { opacity: "0.55" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "token-blink": "token-blink 1.1s steps(2) infinite",
+        "ticker-flow": "ticker-flow 35s linear infinite",
+        "grid-fade": "grid-fade 6s ease-in-out infinite",
       },
     },
   },

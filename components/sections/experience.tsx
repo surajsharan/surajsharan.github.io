@@ -1,92 +1,105 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { useInView } from "react-intersection-observer"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import FeatureMap from "@/components/neural-network/feature-map"
 
-// Replace with your actual experience
-const experiences = [
+type Job = {
+  title: string
+  company: string
+  period: string
+  description: string
+  tags: string[]
+}
+
+const JOBS: Job[] = [
   {
-    id: 1,
-    title: "Senior ML Engineer",
+    title: "Senior Applied AI Engineer",
     company: "AI Research Lab",
-    period: "2021 - Present",
+    period: "2021 — present",
     description:
-      "Leading research on efficient CNN architectures for edge devices. Developed a novel attention mechanism that reduced model size by 30% while maintaining accuracy. Published findings in top-tier conferences.",
-    colorScheme: "viridis" as const,
+      "Lead on LLM inference. Shipped a continuous-batching engine that cut P99 TTFT by 38% under multi-tenant load. Designed a speculative-decoding pipeline that delivered ~2.4× speedup on summarisation workloads.",
+    tags: ["vLLM", "speculative decoding", "CUDA", "Triton"],
   },
   {
-    id: 2,
     title: "Computer Vision Specialist",
     company: "Tech Innovations Inc.",
-    period: "2018 - 2021",
+    period: "2018 — 2021",
     description:
-      "Implemented state-of-the-art object detection models for autonomous systems. Optimized inference time by 40% through model pruning and quantization techniques.",
-    colorScheme: "plasma" as const,
+      "Built and deployed real-time detection models for edge devices. Brought inference latency from 90ms → 28ms via pruning, distillation and INT8 quantization on Jetson-class hardware.",
+    tags: ["edge", "quantization", "TensorRT", "YOLO"],
   },
   {
-    id: 3,
     title: "ML Research Assistant",
     company: "University Research Group",
-    period: "2016 - 2018",
+    period: "2016 — 2018",
     description:
-      "Contributed to research on CNN interpretability and feature visualization. Developed tools for visualizing network activations and understanding model decisions.",
-    colorScheme: "grayscale" as const,
+      "Worked on CNN interpretability and feature-map visualization. Wrote tooling that became the default introspection layer for the group's vision projects.",
+    tags: ["interpretability", "PyTorch", "visualization"],
   },
 ]
 
 export default function Experience() {
-  const [ref, inView] = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  })
-
   return (
-    <section id="experience" className="py-20 bg-white">
-      <div className="container mx-auto px-4">
+    <section
+      id="experience"
+      className="relative border-t border-white/[0.06] bg-ink-950 py-32"
+    >
+      <div className="container mx-auto px-6">
         <motion.div
-          ref={ref}
           initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.15 }}
           transition={{ duration: 0.6 }}
+          className="mb-12 max-w-2xl"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center text-neutral-900">
-            Research & Work Experience
+          <div className="label-mono mb-4">// experience</div>
+          <h2 className="text-3xl font-bold leading-tight md:text-5xl">
+            Where I've shipped.
           </h2>
-
-          <div className="max-w-4xl mx-auto space-y-8">
-            {experiences.map((job, index) => (
-              <motion.div
-                key={job.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-              >
-                <Card className="bg-white border-gray-200 shadow-md overflow-hidden">
-                  <div className="flex flex-col md:flex-row">
-                    <div className="md:w-1/4 p-4 flex justify-center items-center bg-gray-50">
-                      <FeatureMap size={100} colorScheme={job.colorScheme} />
-                    </div>
-                    <div className="md:w-3/4">
-                      <CardHeader>
-                        <CardTitle className="flex flex-col md:flex-row md:justify-between md:items-center gap-2 text-neutral-900">
-                          <span>
-                            {job.title} at {job.company}
-                          </span>
-                          <span className="text-sm font-normal text-neutral-500">{job.period}</span>
-                        </CardTitle>
-                      </CardHeader>
-                      <CardContent>
-                        <p className="text-neutral-700">{job.description}</p>
-                      </CardContent>
-                    </div>
-                  </div>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
         </motion.div>
+
+        <div className="relative">
+          <div className="absolute left-0 top-2 bottom-2 hidden w-px bg-gradient-to-b from-transparent via-white/15 to-transparent md:block" />
+          <ul className="space-y-3">
+            {JOBS.map((job, i) => (
+              <motion.li
+                key={job.title}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.15 }}
+                transition={{ duration: 0.5, delay: i * 0.08 }}
+                className="group relative rounded-lg border border-white/[0.08] bg-white/[0.02] p-6 md:pl-10 transition-colors hover:border-lime/30"
+              >
+                <span className="absolute left-0 top-9 hidden h-2 w-2 -translate-x-1/2 rounded-full bg-white/30 group-hover:bg-lime md:block" />
+
+                <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
+                  <div className="flex-1">
+                    <div className="label-mono mb-2">{job.period}</div>
+                    <h3 className="text-xl font-semibold text-white md:text-2xl">
+                      {job.title}{" "}
+                      <span className="font-normal text-muted-foreground">
+                        · {job.company}
+                      </span>
+                    </h3>
+                    <p className="mt-3 max-w-3xl text-base leading-relaxed text-white/75">
+                      {job.description}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="mt-5 flex flex-wrap gap-2">
+                  {job.tags.map((t) => (
+                    <span
+                      key={t}
+                      className="rounded border border-white/[0.08] bg-ink-900 px-2 py-1 font-mono text-[11px] text-white/70"
+                    >
+                      {t}
+                    </span>
+                  ))}
+                </div>
+              </motion.li>
+            ))}
+          </ul>
+        </div>
       </div>
     </section>
   )
