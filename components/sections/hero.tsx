@@ -1,64 +1,172 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import { Button } from "@/components/ui/button"
+import { useEffect, useMemo, useState } from "react"
 import { motion } from "framer-motion"
-import CNNVisualization from "@/components/neural-network/cnn-visualization"
-import { Code2, BrainCircuit } from "lucide-react"
+import { ArrowUpRight, Zap } from "lucide-react"
+import TokenFlowMount from "@/components/three/token-flow-mount"
+
+const TOKENS = [
+  "Hi.",
+  " I'm",
+  " Suraj",
+  " —",
+  " an",
+  " applied",
+  " AI",
+  " engineer",
+  " working",
+  " on",
+  " LLM",
+  " inference,",
+  " speculative",
+  " decoding,",
+  " and",
+  " low-latency",
+  " serving.",
+]
+
+function useTypedStream(tokens: string[], speedMs = 110) {
+  const [count, setCount] = useState(0)
+  useEffect(() => {
+    if (count >= tokens.length) return
+    const t = setTimeout(() => setCount((c) => c + 1), speedMs)
+    return () => clearTimeout(t)
+  }, [count, tokens.length, speedMs])
+  return tokens.slice(0, count).join("")
+}
 
 export default function Hero() {
-  const [name, setName] = useState("Suraj Sharan")
-  const [title, setTitle] = useState("Applied AI Engineer")
+  const streamed = useTypedStream(TOKENS, 110)
 
-  // You can replace these with your actual information
+  // mock TTFT readout that locks once tokens start
+  const [ttft, setTtft] = useState(0)
   useEffect(() => {
-    // This would be replaced with your actual name and title
-    // For now using placeholder values
+    const start = performance.now()
+    let raf = 0
+    const tick = () => {
+      const elapsed = performance.now() - start
+      setTtft(Math.min(elapsed, 38))
+      if (elapsed < 38) raf = requestAnimationFrame(tick)
+    }
+    raf = requestAnimationFrame(tick)
+    return () => cancelAnimationFrame(raf)
   }, [])
 
+  const metrics = useMemo(
+    () => [
+      { label: "TTFT", value: `${ttft.toFixed(0)} ms`, accent: true },
+      { label: "throughput", value: "1.8k tok/s" },
+      { label: "model", value: "llama-3-8b" },
+      { label: "decode", value: "speculative" },
+    ],
+    [ttft],
+  )
+
   return (
-    <section className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-white">
-      <CNNVisualization />
+    <section className="relative min-h-screen w-full overflow-hidden bg-ink-900">
+      {/* 3D scene */}
+      <div className="absolute inset-0">
+        <TokenFlowMount />
+      </div>
 
-      <div className="absolute inset-0 bg-gradient-to-b from-white/30 to-white/60 z-10"></div>
+      {/* Grid + radial mask */}
+      <div className="pointer-events-none absolute inset-0 bg-grid mask-radial-fade opacity-60" />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-ink-900/40 to-ink-900" />
 
-      <div className="relative z-20 container mx-auto px-4 text-center">
+      {/* Top status bar */}
+      <div className="absolute left-0 right-0 top-20 z-20 px-6">
+        <div className="container mx-auto flex items-center justify-between text-[11px] font-mono uppercase tracking-[0.18em] text-muted-foreground">
+          <div className="flex items-center gap-2">
+            <span className="inline-block h-1.5 w-1.5 rounded-full bg-lime animate-token-blink" />
+            <span>node:gpu-0 · cuda 12.4 · vllm-engine</span>
+          </div>
+          <div className="hidden md:block">prompt → tokens → response</div>
+        </div>
+      </div>
+
+      {/* Main content */}
+      <div className="relative z-10 mx-auto flex min-h-screen max-w-6xl flex-col justify-center px-6 pt-32 pb-24">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5, duration: 0.8 }}
-          className="max-w-3xl mx-auto mt-8"
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          className="max-w-4xl"
         >
-          <div className="flex items-center justify-center mb-6">
-            <BrainCircuit className="h-12 w-12 text-purple-600 mr-3" />
-            <h1 className="text-5xl md:text-7xl font-bold text-neutral-900">{name}</h1>
+          <div className="label-mono mb-6 flex items-center gap-2">
+            <Zap className="h-3.5 w-3.5 text-lime" />
+            <span>applied · ai · engineer</span>
+            <span className="text-ink-400">/</span>
+            <span>part-time researcher</span>
           </div>
 
-          <div className="inline-flex items-center justify-center px-4 py-2 rounded-full bg-gradient-to-r from-purple-600 to-blue-500 text-white mb-8">
-            <Code2 className="h-4 w-4 mr-2" />
-            <p className="text-lg md:text-xl font-medium">{title}</p>
+          <h1 className="text-5xl font-bold leading-[0.95] tracking-tight md:text-7xl lg:text-[88px]">
+            <span className="block text-white">Build the model.</span>
+            <span className="block gradient-lime-text">Serve the tokens.</span>
+            <span className="block text-white/85">Cut the TTFT.</span>
+          </h1>
+
+          <div className="mt-8 max-w-2xl rounded-md border border-white/8 bg-ink-800/60 p-4 font-mono text-sm text-white/85 backdrop-blur-md md:text-base">
+            <div className="mb-2 flex items-center justify-between text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+              <span>stream · stdout</span>
+              <span className="text-lime">200 OK</span>
+            </div>
+            <div className="min-h-[3.5rem]">
+              <span className="text-white/90">{streamed}</span>
+              <span className="caret-token" />
+            </div>
           </div>
 
-          <p className="text-xl md:text-2xl text-neutral-700 mb-8 max-w-2xl mx-auto">
-            Specializing in deep learning, computer vision, and neural network architecture design
-          </p>
-
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
-            <Button
-              className="px-6 py-6 text-base bg-gradient-to-r from-purple-600 to-blue-500 hover:from-purple-700 hover:to-blue-600"
-              onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
+          <div className="mt-10 flex flex-col gap-3 sm:flex-row">
+            <a
+              href="#projects"
+              className="group inline-flex items-center justify-center gap-2 rounded-md bg-lime px-5 py-3 font-mono text-sm font-semibold uppercase tracking-[0.12em] text-ink-900 transition-transform hover:-translate-y-0.5"
             >
-              Contact Me
-            </Button>
-            <Button
-              variant="outline"
-              className="px-6 py-6 text-base border-purple-500 text-purple-500 hover:bg-purple-500/10"
-              onClick={() => document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" })}
+              See the work
+              <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            </a>
+            <a
+              href="#research"
+              className="inline-flex items-center justify-center gap-2 rounded-md border border-white/10 bg-white/[0.02] px-5 py-3 font-mono text-sm font-semibold uppercase tracking-[0.12em] text-white hover:bg-white/[0.06]"
             >
-              View My Research
-            </Button>
+              research focus
+            </a>
+            <a
+              href="#contact"
+              className="inline-flex items-center justify-center gap-2 px-5 py-3 font-mono text-sm font-semibold uppercase tracking-[0.12em] text-white/70 hover:text-lime"
+            >
+              say hi →
+            </a>
           </div>
         </motion.div>
+
+        {/* Metrics row */}
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="mt-16 grid w-full grid-cols-2 gap-px overflow-hidden rounded-md border border-white/10 bg-white/[0.04] md:grid-cols-4"
+        >
+          {metrics.map((m) => (
+            <div
+              key={m.label}
+              className="bg-ink-900/85 px-5 py-4 backdrop-blur-md"
+            >
+              <div className="label-mono mb-1.5">{m.label}</div>
+              <div
+                className={`font-mono text-xl font-semibold ${
+                  m.accent ? "text-lime" : "text-white"
+                }`}
+              >
+                {m.value}
+              </div>
+            </div>
+          ))}
+        </motion.div>
+      </div>
+
+      {/* Scroll cue */}
+      <div className="pointer-events-none absolute bottom-6 left-1/2 -translate-x-1/2 font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
+        scroll ↓
       </div>
     </section>
   )

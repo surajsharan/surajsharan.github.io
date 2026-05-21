@@ -1,111 +1,98 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useEffect, useState } from "react"
 import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { Moon, Sun, Menu, X, BrainCircuit } from "lucide-react"
-import { useTheme } from "next-themes"
+import { Menu, X } from "lucide-react"
+
+const NAV_LINKS = [
+  { name: "About", href: "/#about" },
+  { name: "Research", href: "/#research" },
+  { name: "Skills", href: "/#skills" },
+  { name: "Experience", href: "/#experience" },
+  { name: "Projects", href: "/#projects" },
+  { name: "Learn", href: "/learn" },
+]
 
 export default function Navbar() {
-  const { theme, setTheme } = useTheme()
   const [isScrolled, setIsScrolled] = useState(false)
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [mobileOpen, setMobileOpen] = useState(false)
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10)
-    }
-
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
+    const onScroll = () => setIsScrolled(window.scrollY > 16)
+    onScroll()
+    window.addEventListener("scroll", onScroll, { passive: true })
+    return () => window.removeEventListener("scroll", onScroll)
   }, [])
-
-  const navLinks = [
-    { name: "Home", href: "/" },
-    { name: "About", href: "/#about" },
-    { name: "Experience", href: "/#experience" },
-    { name: "Skills", href: "/#skills" },
-    { name: "Projects", href: "/#projects" },
-    { name: "Learn", href: "/learn" },
-    { name: "Contact", href: "/#contact" },
-  ]
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? "bg-white/90 backdrop-blur-md shadow-md shadow-purple-500/5" : "bg-transparent"
-        }`}
+      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
+        isScrolled
+          ? "border-b border-white/[0.06] bg-ink-900/80 backdrop-blur-md"
+          : "bg-transparent"
+      }`}
     >
-      <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16 md:h-20">
-          <Link href="/" className="text-xl font-bold text-neutral-900 flex items-center">
-            <BrainCircuit className="h-6 w-6 text-purple-600 mr-2" />
-            <span>Suraj Sharan</span>
+      <div className="container mx-auto px-6">
+        <div className="flex h-16 items-center justify-between">
+          <Link href="/" className="flex items-center gap-2.5 group">
+            <span className="relative flex h-2.5 w-2.5">
+              <span className="absolute inset-0 animate-token-blink rounded-full bg-lime" />
+              <span className="absolute inset-0 rounded-full bg-lime/40 blur-sm" />
+            </span>
+            <span className="font-mono text-sm font-semibold tracking-[0.04em]">
+              suraj<span className="text-lime">.</span>sharan
+              <span className="text-muted-foreground">()</span>
+            </span>
           </Link>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
-            {navLinks.map((link) => (
+          <nav className="hidden items-center gap-1 md:flex">
+            {NAV_LINKS.map((l) => (
               <Link
-                key={link.name}
-                href={link.href}
-                className="text-sm font-medium text-neutral-700 hover:text-purple-600 transition-colors"
+                key={l.name}
+                href={l.href}
+                className="px-3 py-2 font-mono text-[12px] uppercase tracking-[0.14em] text-white/70 transition-colors hover:text-lime"
               >
-                {link.name}
+                {l.name}
               </Link>
             ))}
-
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              aria-label="Toggle theme"
-              className="text-neutral-700"
+            <a
+              href="#contact"
+              className="ml-3 inline-flex items-center gap-1.5 rounded-md bg-lime px-3.5 py-2 font-mono text-[12px] font-semibold uppercase tracking-[0.12em] text-ink-900 hover:bg-lime-400"
             >
-              <Sun className="h-5 w-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-              <Moon className="absolute h-5 w-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-            </Button>
+              contact
+            </a>
           </nav>
 
-          {/* Mobile Navigation Toggle */}
-          <div className="flex items-center md:hidden">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              aria-label="Toggle theme"
-              className="mr-2 text-neutral-700"
-            >
-              <Sun className="h-5 w-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-              <Moon className="absolute h-5 w-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-            </Button>
-
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              aria-label="Toggle menu"
-              className="text-neutral-700"
-            >
-              {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-            </Button>
-          </div>
+          <button
+            className="rounded-md p-2 text-white md:hidden"
+            aria-label="Toggle menu"
+            onClick={() => setMobileOpen((o) => !o)}
+          >
+            {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
         </div>
       </div>
 
-      {/* Mobile Menu */}
-      {isMobileMenuOpen && (
-        <div className="md:hidden bg-white shadow-lg">
-          <nav className="flex flex-col py-4">
-            {navLinks.map((link) => (
+      {mobileOpen && (
+        <div className="border-t border-white/[0.06] bg-ink-900/95 backdrop-blur-md md:hidden">
+          <nav className="container mx-auto flex flex-col px-6 py-2">
+            {NAV_LINKS.map((l) => (
               <Link
-                key={link.name}
-                href={link.href}
-                className="px-4 py-3 text-sm font-medium text-neutral-700 hover:bg-gray-100 hover:text-purple-600"
-                onClick={() => setIsMobileMenuOpen(false)}
+                key={l.name}
+                href={l.href}
+                onClick={() => setMobileOpen(false)}
+                className="px-2 py-3 font-mono text-sm uppercase tracking-[0.14em] text-white/80 hover:text-lime"
               >
-                {link.name}
+                {l.name}
               </Link>
             ))}
+            <Link
+              href="#contact"
+              onClick={() => setMobileOpen(false)}
+              className="mt-2 mb-3 inline-flex w-fit items-center gap-1.5 rounded-md bg-lime px-3.5 py-2 font-mono text-xs font-semibold uppercase tracking-[0.12em] text-ink-900"
+            >
+              contact
+            </Link>
           </nav>
         </div>
       )}
