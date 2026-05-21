@@ -141,6 +141,103 @@
     cursor: grab;
     box-shadow: 0 0 0 2px rgba(198, 255, 62, 0.25);
   }
+
+  .prose-article {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 1.0625rem;
+    line-height: 1.7;
+    max-width: 68ch;
+  }
+  .prose-article > * + * {
+    margin-top: 1.1rem;
+  }
+  .prose-article h2 {
+    margin-top: 2.4rem;
+    margin-bottom: 0.6rem;
+    color: #FFFFFF;
+    font-size: 1.625rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    scroll-margin-top: 6rem;
+  }
+  .prose-article h3 {
+    margin-top: 1.8rem;
+    margin-bottom: 0.4rem;
+    color: #FFFFFF;
+    font-size: 1.2rem;
+    font-weight: 600;
+    scroll-margin-top: 6rem;
+  }
+  .prose-article p {
+    color: rgba(255, 255, 255, 0.78);
+  }
+  .prose-article a {
+    color: #C6FF3E;
+    text-decoration: underline;
+    text-decoration-color: rgba(198, 255, 62, 0.35);
+    text-underline-offset: 3px;
+  }
+  .prose-article a:hover {
+    text-decoration-color: #C6FF3E;
+  }
+  .prose-article strong {
+    color: #FFFFFF;
+    font-weight: 600;
+  }
+  .prose-article em {
+    color: rgba(255, 255, 255, 0.95);
+  }
+  .prose-article ul, .prose-article ol {
+    padding-left: 1.25rem;
+  }
+  .prose-article ul {
+    list-style: none;
+  }
+  .prose-article ul > li {
+    position: relative;
+    padding-left: 1.1rem;
+    margin-top: 0.4rem;
+  }
+  .prose-article ul > li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.75em;
+    width: 0.5rem;
+    height: 2px;
+    background-color: #C6FF3E;
+  }
+  .prose-article ol > li {
+    margin-top: 0.4rem;
+    padding-left: 0.25rem;
+  }
+  .prose-article ol > li::marker {
+    color: #C6FF3E;
+    font-family: var(--font-mono);
+    font-size: 0.85em;
+  }
+  .prose-article code:not(pre code) {
+    font-family: var(--font-mono);
+    font-size: 0.875em;
+    padding: 0.12em 0.4em;
+    border-radius: 0.25rem;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    color: #C6FF3E;
+    white-space: nowrap;
+  }
+  .prose-article blockquote {
+    border-left: 2px solid #C6FF3E;
+    padding-left: 1rem;
+    color: rgba(255, 255, 255, 0.7);
+    font-style: italic;
+  }
+  .prose-article hr {
+    border: 0;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.08);
+    margin: 2rem 0;
+  }
 }
 
 /* Subtle focus ring */
