@@ -1,5 +1,6 @@
 "use client"
 
+import Link from "next/link"
 import { motion } from "framer-motion"
 import { ArrowRight } from "lucide-react"
 
@@ -15,6 +16,7 @@ const TOPICS = [
       "Adaptive lookahead under load",
     ],
     metric: { label: "speedup", value: "2.4×" },
+    href: "/notes/speculative-decoding",
   },
   {
     tag: "02 / serving",
@@ -27,6 +29,7 @@ const TOPICS = [
       "TTFT under multi-tenant load",
     ],
     metric: { label: "TTFT P99", value: "84ms" },
+    href: "/notes/ttft",
   },
 ]
 
@@ -94,51 +97,56 @@ export default function Research() {
 
         <div className="grid gap-6 md:grid-cols-2">
           {TOPICS.map((t, i) => (
-            <motion.article
+            <motion.div
               key={t.title}
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.15 }}
               transition={{ duration: 0.6, delay: 0.05 + i * 0.08 }}
-              className="group relative overflow-hidden rounded-lg border border-white/[0.08] bg-ink-800/40 p-7 transition-colors hover:border-lime/30"
             >
-              <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-lime/40 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
+              <Link
+                href={t.href}
+                className="group relative block h-full overflow-hidden rounded-lg border border-white/[0.08] bg-ink-800/40 p-7 transition-colors hover:border-lime/30"
+              >
+                <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-lime/40 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
 
-              <div className="flex items-center justify-between">
-                <span className="label-mono">{t.tag}</span>
-                <div className="rounded-md border border-white/[0.08] bg-ink-900 px-2.5 py-1 font-mono text-[11px]">
-                  <span className="text-muted-foreground">{t.metric.label} </span>
-                  <span className="text-lime">{t.metric.value}</span>
+                <div className="flex items-center justify-between">
+                  <span className="label-mono">{t.tag}</span>
+                  <div className="rounded-md border border-white/[0.08] bg-ink-900 px-2.5 py-1 font-mono text-[11px]">
+                    <span className="text-muted-foreground">{t.metric.label} </span>
+                    <span className="text-lime">{t.metric.value}</span>
+                  </div>
                 </div>
-              </div>
 
-              <h3 className="mt-5 text-2xl font-semibold md:text-3xl">
-                {t.title}
-              </h3>
-              <p className="mt-3 text-base leading-relaxed text-white/75">
-                {t.blurb}
-              </p>
+                <h3 className="mt-5 text-2xl font-semibold md:text-3xl">
+                  {t.title}
+                </h3>
+                <p className="mt-3 text-base leading-relaxed text-white/75">
+                  {t.blurb}
+                </p>
 
-              <ul className="mt-5 space-y-2">
-                {t.bullets.map((b) => (
-                  <li
-                    key={b}
-                    className="flex items-start gap-2 font-mono text-[13px] text-white/80"
-                  >
-                    <span className="mt-2 inline-block h-[3px] w-3 flex-shrink-0 bg-lime" />
-                    {b}
-                  </li>
-                ))}
-              </ul>
+                <ul className="mt-5 space-y-2">
+                  {t.bullets.map((b) => (
+                    <li
+                      key={b}
+                      className="flex items-start gap-2 font-mono text-[13px] text-white/80"
+                    >
+                      <span className="mt-2 inline-block h-[3px] w-3 flex-shrink-0 bg-lime" />
+                      {b}
+                    </li>
+                  ))}
+                </ul>
 
-              <div className="mt-6">
-                <Diagram />
-              </div>
+                <div className="mt-6">
+                  <Diagram />
+                </div>
 
-              <div className="mt-5 flex items-center gap-2 font-mono text-[12px] uppercase tracking-[0.14em] text-lime/80 transition-colors group-hover:text-lime">
-                explore notes <ArrowRight className="h-3.5 w-3.5" />
-              </div>
-            </motion.article>
+                <div className="mt-5 inline-flex items-center gap-2 font-mono text-[12px] uppercase tracking-[0.14em] text-lime/80 transition-colors group-hover:text-lime">
+                  explore notes
+                  <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+                </div>
+              </Link>
+            </motion.div>
           ))}
         </div>
       </div>
