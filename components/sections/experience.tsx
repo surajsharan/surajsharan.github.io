@@ -18,7 +18,7 @@ const JOBS: Job[] = [
     companyUrl: "https://aiq.ae/",
     period: "2023 — present",
     description:
-      "Lead on LLM inference. Shipped a continuous-batching engine that cut P99 TTFT by 38% under multi-tenant load. Designed a speculative-decoding pipeline that delivered ~2.4× speedup on summa[...]",
+      "Lead on LLM inference. Shipped a continuous-batching engine that cut P99 TTFT by 38% under multi-tenant load. Designed a speculative-decoding pipeline that delivered ~2.4× speedup on summarisation workloads.",
     tags: ["vLLM", "speculative decoding", "CUDA", "Triton"],
   },
   {
