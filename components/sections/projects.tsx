@@ -32,8 +32,8 @@ const PROJECTS: Project[] = [
       "Minimal continuous-batching engine I wrote to understand vLLM internals. Paged KV-cache, prefill / decode separation, SSE streaming over a thin HTTP layer.",
     tags: ["serving", "CUDA", "FastAPI"],
     metric: { label: "TTFT P99", value: "84 ms" },
-    liveUrl: "#",
-    githubUrl: "#",
+    liveUrl: "https://surajsharan.github.io/tiny_vLLM",
+    githubUrl: "https://github.com/surajsharan/tiny_vLLM",
   },
   {
     id: 3,
