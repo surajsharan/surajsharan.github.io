@@ -13,26 +13,27 @@ type Job = {
 
 const JOBS: Job[] = [
   {
-    title: "Senior Applied AI Engineer",
-    company: "AI Research Lab",
-    period: "2021 — present",
+    title: "Principal Data Scientist",
+    company: "AIQ, a G42 company (Abu Dhabi, UAE)",
+    companyUrl: "https://aiq.ae/",
+    period: "2023 — present",
     description:
       "Lead on LLM inference. Shipped a continuous-batching engine that cut P99 TTFT by 38% under multi-tenant load. Designed a speculative-decoding pipeline that delivered ~2.4× speedup on summa[...]",
     tags: ["vLLM", "speculative decoding", "CUDA", "Triton"],
   },
   {
-    title: "Principal Data Scientist",
+    title: "Computer Vision Specialist", 
     company: "AIQ, a G42 company (Abu Dhabi, UAE)",
     companyUrl: "https://aiq.ae/",
-    period: "2018 — 2021",
+    period: "2021 — 2023",
     description:
       "Built and deployed real-time detection models for edge devices. Brought inference latency from 90ms → 28ms via pruning, distillation and INT8 quantization on Jetson-class hardware.",
     tags: ["edge", "quantization", "TensorRT", "YOLO"],
   },
   {
-    title: "ML Research Assistant",
+    title: "ML Research Engineer",
     company: "University Research Group",
-    period: "2016 — 2018",
+    period: "2021 — 2023",
     description:
       "Worked on CNN interpretability and feature-map visualization. Wrote tooling that became the default introspection layer for the group's vision projects.",
     tags: ["interpretability", "PyTorch", "visualization"],
