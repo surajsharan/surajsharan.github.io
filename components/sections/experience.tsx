@@ -5,6 +5,7 @@ import { motion } from "framer-motion"
 type Job = {
   title: string
   company: string
+  companyUrl?: string
   period: string
   description: string
   tags: string[]
@@ -16,12 +17,13 @@ const JOBS: Job[] = [
     company: "AI Research Lab",
     period: "2021 — present",
     description:
-      "Lead on LLM inference. Shipped a continuous-batching engine that cut P99 TTFT by 38% under multi-tenant load. Designed a speculative-decoding pipeline that delivered ~2.4× speedup on summarisation workloads.",
+      "Lead on LLM inference. Shipped a continuous-batching engine that cut P99 TTFT by 38% under multi-tenant load. Designed a speculative-decoding pipeline that delivered ~2.4× speedup on summa[...]",
     tags: ["vLLM", "speculative decoding", "CUDA", "Triton"],
   },
   {
-    title: "Computer Vision Specialist",
-    company: "Tech Innovations Inc.",
+    title: "Principal Data Scientist",
+    company: "AIQ, a G42 company (Abu Dhabi, UAE)",
+    companyUrl: "https://aiq.ae/",
     period: "2018 — 2021",
     description:
       "Built and deployed real-time detection models for edge devices. Brought inference latency from 90ms → 28ms via pruning, distillation and INT8 quantization on Jetson-class hardware.",
@@ -77,7 +79,18 @@ export default function Experience() {
                     <h3 className="text-xl font-semibold text-white md:text-2xl">
                       {job.title}{" "}
                       <span className="font-normal text-muted-foreground">
-                        · {job.company}
+                        · {job.companyUrl ? (
+                          <a 
+                            href={job.companyUrl} 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="hover:text-lime transition-colors"
+                          >
+                            {job.company}
+                          </a>
+                        ) : (
+                          job.company
+                        )}
                       </span>
                     </h3>
                     <p className="mt-3 max-w-3xl text-base leading-relaxed text-white/75">
